@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<script>
+    function validateform(){  
+    var name=document.userform.name.value;  
+
+      if (name==null || name==""){  
+   alert("Name can't be blank");
+   return false;  
+      }
+   }
+  function filterCities() {
+            const stateSelect = document.getElementById("state");
+            const citySelect = document.getElementById("city");
+            const selectedState = stateSelect.value;
+            citySelect.innerHTML = "<option value=''>Select City</option>"; 
+            
+            if (selectedState) {
+                const cities = citiesByState[selectedState];
+                cities.forEach(city => {
+                    const option = document.createElement("option");
+                    option.value = city;
+                    option.textContent = city;
+                    citySelect.appendChild(option);
+                });
+            }
+        }  
+        const citiesByState = {
+    "Maharashtra": [
+    "Mumbai", "Pune", "Nagpur", "Nashik", "Aurangabad",
+    "Solapur", "Amravati", "Kolhapur", "Sangli", "Satara"
+    ],
+    "Karnataka": [
+    "Bangalore", "Mysore", "Hubli", "Belgaum", "Mangalore",
+    "Gulbarga", "Davanagere", "Shimoga", "Bellary", "Tumkur"
+    ],
+    "Gujarat": [
+    "Ahmedabad", "Surat", "Vadodara", "Rajkot", "Bhavnagar",
+    "Jamnagar", "Junagadh", "Gandhinagar", "Anand", "Bharuch"
+    ]
+    };
+
+  
+</script>
+<div class="column-form">
+<h2>Student Registration Form</h2>
+<form id="user-form" action="welcome.php" method="post">
+   <label for="name">Name:</label>
+   <input type="text" id="name" required><br><br>
+
+   <label for="email">Email:</label>
+   <input type="email" id="email" required><br><br>
+  
+   <label for="address">Address:</label>
+   <textarea id="address" required></textarea><br><br>
+   
+   <label for="phone">Phone number:</label>
+   <input type="tel" id="phone"  placeholder="10 digit PhoneNumber" maxlength="10"oninput="this.value = this.value.replace(/[^0-9]/g, '');"><br><br>
+
+   <label for="country">Country:</label>
+   <input type="text" id="country" required><br><br>
+
+   <label for="state">State:</label>
+   <input type="text" id="state" required list="statelist" onchange="filterCities()" placeholder="Select from dropdown"><br><br>
+   <datalist id="statelist">
+       <option>Maharashtra</option>
+       <option>Gujarat</option>
+       <option>Karnataka</option>
+    <br><br>
+    </datalist>
+   
+    <label for="city">City:</label>
+    <select name="city" id="city"><br></br>
+        <option value="">Select City</option>
+    </select><br><br>
+
+   <label for="zip">Zip Code:</label>
+   <input id="zip" type="text" placeholder="Pin code" maxlength="6"  oninput="this.value = this.value.replace(/[^0-9]/g, '');"><br><br>
+
+   <button type="submit" onsubmit="return validateform()">Submit</button>
+
+</form>
+
+</div>
+<html>
+<body>
